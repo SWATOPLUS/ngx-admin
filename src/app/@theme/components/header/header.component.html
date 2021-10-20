@@ -56,10 +56,12 @@
       matRipple
       [matRippleUnbounded]="true"
       [matRippleCentered]="true">
-      <nb-user [nbContextMenu]="userMenu"
+     
+      <button *ngIf="!user" class="btn btn-primary" (click)="onSignIn()">Sign In</button>
+      <nb-user *ngIf="user" [nbContextMenu]="userMenu"
                [onlyPicture]="userPictureOnly"
-               [name]="user?.name"
-               [picture]="user?.picture">
+               [name]="user.name"
+               [picture]="user.imageUrl">
       </nb-user>
     </nb-action>
   </nb-actions>

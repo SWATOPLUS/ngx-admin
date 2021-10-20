@@ -20,6 +20,13 @@ import {
   NbToastrModule,
   NbWindowModule,
 } from '@nebular/theme';
+import { GoogleApiModule, NgGapiClientConfig, NG_GAPI_CONFIG } from 'ng-gapi';
+
+const gapiClientConfig: NgGapiClientConfig = {
+  // todo: make configurable for dev and prod enviroments
+  client_id: '729569034265-9r0cvgiv8024frns83d3ou3ohsntfmiu.apps.googleusercontent.com',
+  discoveryDocs: ['https://analyticsreporting.googleapis.com/$discovery/rest?version=v4'],
+};
 
 @NgModule({
   declarations: [AppComponent],
@@ -28,6 +35,10 @@ import {
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
+    GoogleApiModule.forRoot({
+      provide: NG_GAPI_CONFIG,
+      useValue: gapiClientConfig,
+    }),
     NbSidebarModule.forRoot(),
     NbMenuModule.forRoot(),
     NbDatepickerModule.forRoot(),

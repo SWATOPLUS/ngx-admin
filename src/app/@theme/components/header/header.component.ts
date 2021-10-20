@@ -1,11 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { NbMediaBreakpointsService, NbMenuService, NbSidebarService, NbThemeService } from '@nebular/theme';
+import { NbMediaBreakpointsService, NbMenuItem, NbMenuService, NbSidebarService, NbThemeService } from '@nebular/theme';
 
-import { UserData } from '../../../@core/data/users';
 import { LayoutService } from '../../../@core/utils';
 import { map, takeUntil } from 'rxjs/operators';
 import { Subject, Observable } from 'rxjs';
 import { RippleService } from '../../../@core/utils/ripple.service';
+import { UserService, UserProfile } from '../../../@core/services/user.service';
 
 @Component({
   selector: 'ngx-header',
@@ -13,11 +13,10 @@ import { RippleService } from '../../../@core/utils/ripple.service';
   templateUrl: './header.component.html',
 })
 export class HeaderComponent implements OnInit, OnDestroy {
-
   private destroy$: Subject<void> = new Subject<void>();
   public readonly materialTheme$: Observable<boolean>;
   userPictureOnly: boolean = false;
-  user: any;
+  user: UserProfile;
 
   themes = [
     {
@@ -48,13 +47,21 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   currentTheme = 'default';
 
-  userMenu = [ { title: 'Profile' }, { title: 'Log out' } ];
+  userMenu: NbMenuItem[] = [
+    { title: 'Profile' },
+    {
+      title: 'Log out',
+      data: {
+        onClick: () => this.userService.signOut(),
+      },
+    },
+  ];
 
   public constructor(
     private sidebarService: NbSidebarService,
     private menuService: NbMenuService,
     private themeService: NbThemeService,
-    private userService: UserData,
+    private userService: UserService,
     private layoutService: LayoutService,
     private breakpointService: NbMediaBreakpointsService,
     private rippleService: RippleService,
@@ -64,14 +71,19 @@ export class HeaderComponent implements OnInit, OnDestroy {
         const themeName: string = theme?.name || '';
         return themeName.startsWith('material');
       }));
+
+    this.userService
+      .getUserProfile()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(x => this.user = x);
+  }
+
+  public onSignIn() {
+    this.userService.signIn();
   }
 
   ngOnInit() {
     this.currentTheme = this.themeService.currentTheme;
-
-    this.userService.getUsers()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((users: any) => this.user = users.nick);
 
     const { xl } = this.breakpointService.getBreakpointsMap();
     this.themeService.onMediaQueryChange()
