@@ -1,4 +1,15 @@
 {
+    "files.exclude": {
+        "node_modules/": true,
+        ".VSCodeCounter": true
+    },
     "typescript.tsdk": "./node_modules/typescript/lib",
-    "tslint.enable": false
+    "tslint.enable": false,
+    "VSCodeCounter.exclude": [
+        "**/.gitignore",
+        "**/.vscode/**",
+        "**/node_modules/**",
+        "package-lock.json"
+    ],
+    "VSCodeCounter.history": 0
 }
