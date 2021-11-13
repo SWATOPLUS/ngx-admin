@@ -5,8 +5,11 @@
 # You can see what browsers were selected by your queries by running:
 #   npx browserslist
 
-> 0.5%
-last 2 versions
-Firefox ESR
-not dead
-IE 11
+last 5 firefox versions,
+last 5 chrome versions,
+last 5 edge versions,
+last 5 safari versions,
+last 2 and_chr versions,
+last 2 and_ff versions,
+last 5 ios_saf versions,
+last 5 samsung versions,
