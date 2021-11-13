@@ -1,18 +1,15 @@
 import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MAT_RIPPLE_GLOBAL_OPTIONS } from '@angular/material/core';
-import { of as observableOf } from 'rxjs';
 
 import { throwIfAlreadyLoaded } from './module-import-guard';
 import {
-  AnalyticsService,
+  RippleService,
   LayoutService,
-  SeoService,
   StateService,
 } from './utils';
 
 import { UserService } from './services/user.service';
-import { RippleService } from './utils/ripple.service';
 
 const socialLinks = [
   {
@@ -38,9 +35,7 @@ const DATA_SERVICES = [
 
 export const NB_CORE_PROVIDERS = [
   ...DATA_SERVICES,
-  AnalyticsService,
   LayoutService,
-  SeoService,
   StateService,
   UserService,
 ];
