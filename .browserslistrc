@@ -5,11 +5,16 @@
 # You can see what browsers were selected by your queries by running:
 #   npx browserslist
 
-last 5 firefox versions,
-last 5 chrome versions,
-last 5 edge versions,
-last 5 safari versions,
-last 2 and_chr versions,
-last 2 and_ff versions,
-last 5 ios_saf versions,
-last 5 samsung versions,
+# Or visit:
+# https://browserslist.dev/
+
+firefox >= 90,
+chrome >= 90,
+edge >= 90,
+safari >= 13,
+and_chr >= 90,
+and_ff >= 90,
+ios_saf >= 13,
+samsung >= 10,
+
+
